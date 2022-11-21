@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:models="clr-namespace:HyridApp.Models" 
+             xmlns:DTO="clr-namespace:HyridApp.DTO"
+             xmlns:views="clr-namespace:HyridApp.Views"
+             x:Class="HyridApp.Views.DetailPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="toobbalBtn_expenseList" Text="Expense" Clicked="toobbalBtn_expenseList_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="FontAwesome"
+                                 Glyph="&#xf022;" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem Clicked="editButtonClicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="FontAwesome"
+                                 Glyph="&#xf044;" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical">
+            <StackLayout Orientation="Horizontal" Margin="10" VerticalOptions="StartAndExpand">
+                <StackLayout Orientation="Vertical" Spacing="5" Margin="10" HorizontalOptions="Start">
+                    <Frame BorderColor="White" CornerRadius="12" Padding="18" BackgroundColor="LightBlue">
+                        <StackLayout Spacing="30">
+                            <Label Text="Name:" FontSize="Body" FontAttributes="Bold" />
+                            <Label Text="Dest:" FontSize="Body" FontAttributes="Bold" />
+                            <Label Text="Start:" FontSize="Body" FontAttributes="Bold" />
+                            <Label Text="End:" FontSize="Body" FontAttributes="Bold" />
+                            <Label Text="Risk:" FontSize="Body" FontAttributes="Bold" />
+                            <Label Text="Desc:" FontSize="Body" FontAttributes="Bold" />
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+                <StackLayout Orientation="Vertical" Spacing="5" Margin="10" HorizontalOptions="FillAndExpand">
+                    <Frame BorderColor="CadetBlue" CornerRadius="15" HorizontalOptions="Fill" Padding="5">
+                        <Grid x:Name="Grid_tripDetail">
+                            <Entry x:Name="entry_name" Grid.Row="0" IsReadOnly="True" Text="name" TextChanged="onEntryTextChanged"/>
+                            <Entry x:Name="entry_dest" Grid.Row="1" IsReadOnly="True" Text="destination" TextChanged="onEntryTextChanged"/>
+                            <DatePicker x:Name="entry_start" Grid.Row="2" IsEnabled="False" />
+                            <DatePicker x:Name="entry_end" Grid.Row="3" IsEnabled="False" />
+                            <Entry x:Name="entry_risk" Grid.Row="4" IsReadOnly="True" Text="Yes" />
+                            <Entry x:Name="entry_desc" Grid.Row="5" IsReadOnly="True" Text="Desc" />
+                        </Grid>
+                    </Frame>
+                </StackLayout>
+            </StackLayout>
+            <StackLayout Margin="5" VerticalOptions="CenterAndExpand">
+                <ListView x:Name="lv_listExpenses" x:DataType="DTO:expenseDto" 
+                          HorizontalOptions="Fill" VerticalOptions="Fill" HasUnevenRows="True">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <SwipeView>
+                                    <SwipeView.LeftItems>
+                                        <SwipeItems>
+                                            <SwipeItem Text="Delete" Clicked="SwipeItem_Clicked"
+                                               BackgroundColor="LightPink">
+                                                <SwipeItem.IconImageSource>
+                                                    <FontImageSource FontFamily="FontAwesome"
+                                                             Glyph="&#xf2ed;"/>
+                                                </SwipeItem.IconImageSource>
+                                            </SwipeItem>
+                                        </SwipeItems>
+                                    </SwipeView.LeftItems>
+                                    <Frame CornerRadius="10" Padding="5">
+                                        <StackLayout Orientation="Vertical">
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label Text="Type: " HorizontalOptions="Start" FontAttributes="Bold"/>
+                                                <Label x:Name="label_ex_type" Text="{Binding expenseType}" HorizontalOptions="StartAndExpand"/>
+                                                <Label Text="Amount: " HorizontalOptions="End"/>
+                                                <Label x:Name="label_ex_amount" Text="{Binding expenseAmount}" HorizontalOptions="End"/>
+                                            </StackLayout>
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label Text="Date: " HorizontalOptions="Start"/>
+                                                <Label x:Name="label_ex_datetime" 
+                                                       Text="{Binding expenseDateTime, StringFormat='{0:MMMM dd, yyyy}'}" />
+                                            </StackLayout>
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label Text="Comment"/>
+                                                <Label Text="{Binding expenseComment}"/>
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </Frame>
+                                </SwipeView>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+            <StackLayout Margin="10" VerticalOptions="End">
+                <Button x:Name="btn_Save" 
+                        Clicked="btn_Save_Clicked"
+                        IsVisible="False"
+                        Text="Save"
+                        TextColor="White"
+                        BackgroundColor="CornflowerBlue"
+                        HorizontalOptions="FillAndExpand"
+                        CornerRadius="15"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

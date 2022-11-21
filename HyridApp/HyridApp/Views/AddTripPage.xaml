@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HyridApp.Views.AddTripPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout x:Name="stackLayout_AddForm"
+                         Margin="10"
+                         VerticalOptions="StartAndExpand"
+                         Orientation="Vertical">
+                <Entry x:Name="entry_tripName" 
+                       Placeholder="Trip Name"
+                       TextChanged="onEntryTextChanged"
+                       Margin="5"/>
+                <Entry x:Name="entry_tripDestination" 
+                       Placeholder="Trip Destination"
+                       TextChanged="onEntryTextChanged"
+                       Margin="5"/>
+
+                <StackLayout Margin="10"
+                             Orientation="Horizontal">
+
+                    <StackLayout Orientation="Vertical">
+                        <Label Text="Start Date:"
+                           FontSize="Body"
+                           FontAttributes="Bold"
+                           VerticalOptions="CenterAndExpand"
+                           HorizontalOptions="Start"/>
+                        <Label Text="End Date:"
+                           FontSize="Body"
+                           FontAttributes="Bold"
+                           VerticalOptions="CenterAndExpand"
+                           HorizontalOptions="Start"/>
+
+                    </StackLayout>
+
+                    <StackLayout Orientation="Vertical">
+
+                        
+                        <DatePicker 
+                            x:Name="dp_startDate"
+                            HorizontalOptions="End"
+                            Margin="5"
+                            Format="D"/>
+                        <DatePicker 
+                            x:Name="dp_endDate"
+                            HorizontalOptions="End"
+                            Margin="5"
+                            Format="D"
+                            BindingContext="{x:Reference dp_startDate}"
+                            MinimumDate="{Binding Date}"/>
+
+
+                    </StackLayout>
+
+                </StackLayout>
+
+                <StackLayout x:Name="stackLayout_CheckBoxContainer"
+                             Orientation="Horizontal"
+                             Margin="10">
+                    <Label Text="Required Risk Assessment: "
+                           FontSize="Body"
+                           FontAttributes="Bold"
+                           VerticalOptions="CenterAndExpand"/>
+                    <CheckBox CheckedChanged="CheckBox_CheckedChanged"
+                              Color="CadetBlue"
+                              VerticalOptions="CenterAndExpand"/>
+                </StackLayout>
+                
+                <Entry x:Name="entry_tripDescription" 
+                       TextChanged="onEntryTextChanged"
+                       Placeholder="Trip Description"
+                       Margin="5"/>
+            </StackLayout>
+            <StackLayout Margin="10">
+                <Button x:Name="btn_Save" 
+                        Clicked="btn_Save_Clicked"
+                        Text="Save"
+                        TextColor="White"
+                        BackgroundColor="CornflowerBlue"
+                        HorizontalOptions="FillAndExpand"
+                        CornerRadius="15"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

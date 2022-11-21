@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HyridApp.Views.AboutPage">
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical" 
+                     Margin="10"
+                     HorizontalOptions="Center"
+                     VerticalOptions="Center">
+            <Label Text="Nguyen Quang Dung" 
+                   FontSize="30"
+                   FontAttributes="Bold"/>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Student Code: "
+                       FontSize="20"
+                       FontAttributes="Bold"/>
+                <Label Text="GCS200006"
+                       FontSize="20"
+                       FontAttributes="Italic"/>
+            </StackLayout>
+            <Label Text="Greenwich Fpt in Vietnam"
+                   FontSize="20"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="HyridApp.Views.ListTrip">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Cloud Database Options" Clicked="ToolbarItem_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="FontAwesome"
+                                 Glyph="&#xf35b;"/>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <StackLayout BackgroundColor="AliceBlue"
+                 Orientation="Vertical"
+                 Margin="10,20">
+        <SearchBar x:Name="searchBar_trip" 
+                   VerticalOptions="Start"
+                   Placeholder="Search trip ..."
+                   FontSize="Medium"
+                   FontAttributes="Italic"
+                   TextChanged="searchBar_trip_SearchButtonPressed"/>
+        <StackLayout VerticalOptions="CenterAndExpand">
+            <ListView x:Name="lv_listTrips" HasUnevenRows="True" IsPullToRefreshEnabled="True" Refreshing="lv_listTrips_Refreshing">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <SwipeView>
+                                <SwipeView.LeftItems>
+                                    <SwipeItem Text="Detail"
+                                               BackgroundColor="LightGreen"
+                                               Invoked="openDetail" CommandParameter="{Binding .}">
+                                        <SwipeItem.IconImageSource>
+                                            <FontImageSource FontFamily="FontAwesome"
+                                                             Glyph="&#xf15c;"/>
+                                        </SwipeItem.IconImageSource>
+                                    </SwipeItem>
+                                    <SwipeItem Text="Delete"
+                                               BackgroundColor="LightPink"
+                                               Invoked="deleteTrip">
+                                        <SwipeItem.IconImageSource>
+                                            <FontImageSource FontFamily="FontAwesome"
+                                                             Glyph="&#xf2ed;"/>
+                                        </SwipeItem.IconImageSource>
+                                    </SwipeItem>
+                                </SwipeView.LeftItems>
+                                <Frame CornerRadius="15"
+                                       Margin="2.5"
+                                   BorderColor="CadetBlue">
+                                    <StackLayout Orientation="Horizontal">
+                                        <StackLayout Orientation="Vertical" Spacing="5">
+                                            <Label Text="Name: " FontSize="16" FontAttributes="Bold"/>
+                                            <Label Text="Destination: " FontSize="16" FontAttributes="Bold"/>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Vertical">
+                                            <Label Text="{Binding tripName, Mode=OneWay}" FontSize="16"/>
+                                            <Label Text="{Binding tripDestination, Mode=OneWay}" FontSize="16"/>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Vertical" HorizontalOptions="EndAndExpand">
+                                            <Label Text="Start Date: " FontSize="16" FontAttributes="Bold" />
+                                            <Label Text="{Binding tripStartDate, StringFormat='{0:MMMM dd, yyyy}'}" 
+                                               FontSize="16" />
+                                        </StackLayout>
+                                    </StackLayout>
+                                </Frame>
+                            </SwipeView>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+        <Button Text="ResetData"
+                Clicked="ResetDatabase"
+                VerticalOptions="End"/>
+    </StackLayout>
+</ContentPage>
